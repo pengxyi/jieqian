@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+  </script>
+</head>
+
+<body>
+  <div>
+    <h1>借条</h1>
+    张*有多少钱:<input type="text" id="input1">张*欠别人钱:<input type="text" id="zhang_qian"></br>
+    李*有多少钱:<input type="text" id="input2">李*欠别人钱:<input type="text" id="li_qian"></br>
+    借出：<select id="land">
+                <option value="0" selected>请选择人：</option>
+                <option value="1">张*</option>
+                <option value="2">李*</option></br>
+              </select> 借入：
+    <select id="borrow">
+                <option value="0" selected>请选择人：</option>
+                <option value="1">张*</option>
+                <option value="2">李*</option>
+              </select></br>
+    借的钱数:<input type="text" id="input3"></br>
+    <button id="message">提交</button>
+  </div>
+
+  <script>
+
+    // 第一步：输出两个人的随机钱数
+
+    var input1 = Math.round(Math.random() * 500);
+    var input2 = Math.round(Math.random() * 500);
+    var input3 = 0;
+    var zhang_qian = 0;
+    var li_qian = 0;
+
+    // 第二步：将钱展示在页面上
+    $('#input1').val(input1);
+    $('#input2').val(input2);
+    $('#input3').val(input3);
+    $('#zhang_qian').val(zhang_qian);
+    $('#li_qian').val(li_qian);
+
+    // 第三步：
+
+    $("#message").click(function() {
+      var land = $("#land option:selected").val();
+      var borrow = $("#borrow option:selected").val();
+      var input3 = $("#input3").val();
+      input3 = parseInt(input3);
+      if (land == 1) {
+        if (borrow == 2) {
+          input1 = input1 - input3;
+          input2 = input2 + input3;
+          if(input1<0||input2<0){
+            alert("手上的钱不能为负数！");
+            return false;
+          }
+        }
+      } else if (land == 2) {
+        if (borrow == 1) {
+          input2 = input2 - input3;
+          input1 = input1 + input3;
+          if(input1<0||input2<0){
+            alert("手上的钱不能为负数！");
+            return false;
+          }
+        }
+      }
+      if(land==0){
+        alert("请选择借出的人！");
+      }
+      if(borrow==0){
+        alert("请选择借入的人！");}
+
+        if (land == 1) {
+          if (borrow == 1) {
+              alert("请选择不同的两个人！");
+          }
+        }
+        if (land == 2) {
+          if (borrow == 2) {
+              alert("请选择不同的两个人！");
+          }
+        }
+        if (input3==0){
+            alert("请输入借的钱数！");
+        }
+
+
+
+      $('#input1').val(input1);
+      $('#input2').val(input2);
+
+
+      if (land==1){
+        if (borrow == 2) {
+          zhang_qian = zhang_qian - input3;
+          li_qian = li_qian + input3;
+        }
+      }else if(land==2) {
+        if (borrow == 1) {
+          zhang_qian = zhang_qian + input3;
+          li_qian = li_qian - input3;
+      }
+    }
+      $('#zhang_qian').val(zhang_qian);
+      $('#li_qian').val(li_qian);
+    });
+
+  </script>
+</body>
+
+</html>
