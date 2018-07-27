@@ -15,8 +15,8 @@
 <body>
   <div class="father">
     <h1>借条</h1>
-    张*有多少钱:<input type="text" id="input1">张*欠别人钱:<input type="text" id="zhang_qian"></br>
-    李*有多少钱:<input type="text" id="input2">李*欠别人钱:<input type="text" id="li_qian"></br>
+    张*有多少钱:<input type="text" id="input1"></br>张*欠别人钱:<input type="text" id="zhang_qian"></br>
+    李*有多少钱:<input type="text" id="input2"></br>李*欠别人钱:<input type="text" id="li_qian"></br>
     借出：<select id="land">
                 <option value="0" selected>请选择人：</option>
                 <option value="1">张*</option>
@@ -116,6 +116,32 @@
       $('#zhang_qian').val(zhang_qian);
       $('#li_qian').val(li_qian);
     });
+
+
+    <!-- Button trigger modal -->
+<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+  Launch demo modal
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 
   </script>
 </body>

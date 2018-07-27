@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8" />
+  <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-grid.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap-reboot.css" rel="stylesheet">
+  <link href="https://cdn.bootcss.com/bootstrap/4.1.1/css/bootstrap.css" rel="stylesheet">
+  <script src="https://cdn.bootcss.com/bootstrap/4.1.1/js/bootstrap.bundle.js"></script>
+  <style>
+    .left {
+      width=500px;
+      float: left;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .right {
+      float: right;
+      padding: 20px;
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="left">
+    <h1>信息</h1> code:
+    <span type="text" id="code"></span></br>
+
+    <p>date</p>
+
+    name:<span type="text" id="name"></span></br>
+    vip_price:<span type="text" id="vip_price"></span></br>
+    price:<span type="text" id="price"></span></br>
+    unit:<span type="text" id="unit"></span></br>
+    quantity:<span type="text" id="quantity"></span></br>
+
+    <h1>pic</h1> front:
+    <img id="front" width=“10px” height="200px" src="" /></br>
+    side:<img id="side" width=“200px” height="200px" src="" />
+  </div class="q1">
+
+
+  <div class="right">
+    <select id="user">
+                <option value="0" selected>请选择人：</option>
+                <option value="1">彭毅</option>
+                <option value="2">彭鑫</option>
+    </select>
+  </div>
+
+  <!-- Button trigger modal -->
+  <button type="button" id="btn" class="btn btn-primary btn-lg">
+    购物人
+  </button>
+  <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        </div>
+        <div class="current_user">
+          <div class="q1">
+            图像:<img id="avatar0" width=“50px” height="50px" src="" /></br>
+            姓名:<span type="text" id="name0"></span></br>
+            会员状态:<span type="text" id="vip"></span></br>
+            iPhone价格:<span type="text" id="price0"></span></br>
+            打折后iPhone价格:<span type="text" id="price1"></span></br>
+            有多少钱:<span type="text" id="money0"></span></br>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+          <button type="button" class="btn btn-primary">确定</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    var data = {
+      code: "0",
+      data: {
+        name: "iPhone X",
+        vip_price: "0.9",
+        price: "8688.00",
+        unit: "台",
+        quantity: "200",
+        pic: {
+          front: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532673938394&di=0bf099e1b7837ae5326aac0b08eb91ba&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01683459f30456a801216a4bf5e9e6.jpg%402o.jpg",
+          side: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532673981051&di=997b176fad7259b9cf98652c7a14b80e&imgtype=0&src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20171107%2F89e431c08fe6416bb37be820d48cd307.jpeg",
+        }
+      }
+    };
+
+    var pengyi = {
+      code: "0",
+      data: {
+        avatar: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532673938394&di=0bf099e1b7837ae5326aac0b08eb91ba&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01683459f30456a801216a4bf5e9e6.jpg%402o.jpg",
+        name: "彭毅",
+        vip: "不是",
+        price: "8688.00",
+        money: "8888.00",
+        address: {
+          addres_one: "上海市奉贤区",
+          addres_two: "河南省信阳市"
+        }
+      }
+    };
+
+    var pengxing = {
+      code: "0",
+      data: {
+        avatar: "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1532673938394&di=0bf099e1b7837ae5326aac0b08eb91ba&imgtype=0&src=http%3A%2F%2Fimg.zcool.cn%2Fcommunity%2F01683459f30456a801216a4bf5e9e6.jpg%402o.jpg",
+        name: "彭新",
+        vip: "是",
+        price: "8688.00",
+        price1: "7989.00",
+        money: "8000.00",
+
+        address: {
+          addres_one: "上海市奉贤区",
+          addres_two: "河南省信阳市"
+        }
+      }
+    };
+
+    var current_user = '';
+    // 产品
+    $('#name').text(data.data.name);
+    $('#vip_price').text(data.data.vip_price);
+    $('#price').text(data.data.price);
+    $('#unit').text(data.data.unit);
+    $('#quantity').text(data.data.quantity);
+    $("#front").attr("src", data.data.pic.front);
+    $("#side").attr("src", data.data.pic.side);
+
+
+    // 判断
+    $("#btn").click(function() {
+       var user = $("#user option:selected").val();
+          if (user==1){
+             var current_user = pengyi;
+      }else if(user==2){
+             var current_user = pengxing;
+      }
+
+      console.log(user);
+      if (current_user == pengyi) {
+        $("#avatar0").attr("src", pengyi.data.avatar);
+        $('#name0').text(pengyi.data.name);
+        $('#vip').text(pengyi.data.vip);
+        $('#price0').text(pengyi.data.price);
+        $('#money0').text(pengyi.data.money);
+        $('#myModal').modal('show')
+      } else if(current_user == pengxing) {
+      $("#avatar0").attr("src", pengxing.data.avatar);
+      $('#name0').text(pengxing.data.name);
+      $('#vip0').text(pengxing.data.vip);
+      $('#price0').text(pengxing.data.price);
+      $('#price1').text(pengxing.data.price1);
+      $('#money0').text(pengxing.data.money);
+      $('#myModal').modal('show')
+    }else {
+      alert("需要选择购物人")
+      }
+    });
+  </script>
+
+</body>
+
+</html>
